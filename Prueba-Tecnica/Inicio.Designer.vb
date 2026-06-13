@@ -61,7 +61,34 @@ Partial Class Inicio
         TextBox6 = New TextBox()
         Label14 = New Label()
         TabPage5 = New TabPage()
+        Panel5 = New Panel()
+        Label26 = New Label()
+        TextBox16 = New TextBox()
+        Label19 = New Label()
+        Label22 = New Label()
+        Label24 = New Label()
+        TextBox5 = New TextBox()
+        TextBox11 = New TextBox()
+        Button5 = New Button()
+        TextBox15 = New TextBox()
+        Label25 = New Label()
+        Panel4 = New Panel()
+        Label18 = New Label()
+        Label20 = New Label()
+        Label21 = New Label()
+        TextBox12 = New TextBox()
+        TextBox13 = New TextBox()
+        Button4 = New Button()
+        TextBox14 = New TextBox()
+        Label23 = New Label()
         TabPage6 = New TabPage()
+        TableLayoutPanel2 = New TableLayoutPanel()
+        Label32 = New Label()
+        Label27 = New Label()
+        Label28 = New Label()
+        Label29 = New Label()
+        Label30 = New Label()
+        Label31 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TableLayoutPanel1.SuspendLayout()
@@ -70,6 +97,11 @@ Partial Class Inicio
         Panel1.SuspendLayout()
         TabPage4.SuspendLayout()
         Panel3.SuspendLayout()
+        TabPage5.SuspendLayout()
+        Panel5.SuspendLayout()
+        Panel4.SuspendLayout()
+        TabPage6.SuspendLayout()
+        TableLayoutPanel2.SuspendLayout()
         SuspendLayout()
         ' 
         ' TabControl1
@@ -454,7 +486,7 @@ Partial Class Inicio
         ' 
         ' Button3
         ' 
-        Button3.Location = New Point(3, 342)
+        Button3.Location = New Point(10, 327)
         Button3.Name = "Button3"
         Button3.Size = New Size(149, 29)
         Button3.TabIndex = 5
@@ -494,6 +526,8 @@ Partial Class Inicio
         ' 
         ' TabPage5
         ' 
+        TabPage5.Controls.Add(Panel5)
+        TabPage5.Controls.Add(Panel4)
         TabPage5.Location = New Point(4, 29)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
@@ -503,8 +537,220 @@ Partial Class Inicio
         TabPage5.UseVisualStyleBackColor = True
         TabPage5.UseWaitCursor = True
         ' 
+        ' Panel5
+        ' 
+        Panel5.BorderStyle = BorderStyle.Fixed3D
+        Panel5.Controls.Add(Label26)
+        Panel5.Controls.Add(TextBox16)
+        Panel5.Controls.Add(Label19)
+        Panel5.Controls.Add(Label22)
+        Panel5.Controls.Add(Label24)
+        Panel5.Controls.Add(TextBox5)
+        Panel5.Controls.Add(TextBox11)
+        Panel5.Controls.Add(Button5)
+        Panel5.Controls.Add(TextBox15)
+        Panel5.Controls.Add(Label25)
+        Panel5.Location = New Point(413, 15)
+        Panel5.Name = "Panel5"
+        Panel5.Size = New Size(293, 378)
+        Panel5.TabIndex = 14
+        Panel5.UseWaitCursor = True
+        ' 
+        ' Label26
+        ' 
+        Label26.AutoSize = True
+        Label26.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label26.Location = New Point(9, 264)
+        Label26.Name = "Label26"
+        Label26.Size = New Size(103, 23)
+        Label26.TabIndex = 15
+        Label26.Text = "ID de Autor:"
+        Label26.UseWaitCursor = True
+        ' 
+        ' TextBox16
+        ' 
+        TextBox16.Location = New Point(9, 290)
+        TextBox16.Name = "TextBox16"
+        TextBox16.Size = New Size(219, 27)
+        TextBox16.TabIndex = 14
+        TextBox16.UseWaitCursor = True
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label19.Location = New Point(9, 12)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(168, 31)
+        Label19.TabIndex = 13
+        Label19.Text = "Registrar Libro:"
+        Label19.UseWaitCursor = True
+        ' 
+        ' Label22
+        ' 
+        Label22.AutoSize = True
+        Label22.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label22.Location = New Point(9, 197)
+        Label22.Name = "Label22"
+        Label22.Size = New Size(51, 23)
+        Label22.TabIndex = 12
+        Label22.Text = "ISBN:"
+        Label22.UseWaitCursor = True
+        ' 
+        ' Label24
+        ' 
+        Label24.AutoSize = True
+        Label24.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label24.Location = New Point(9, 129)
+        Label24.Name = "Label24"
+        Label24.Size = New Size(174, 23)
+        Label24.TabIndex = 11
+        Label24.Text = "Fecha de publicación:"
+        Label24.UseWaitCursor = True
+        ' 
+        ' TextBox5
+        ' 
+        TextBox5.Location = New Point(9, 223)
+        TextBox5.Name = "TextBox5"
+        TextBox5.Size = New Size(219, 27)
+        TextBox5.TabIndex = 7
+        TextBox5.UseWaitCursor = True
+        ' 
+        ' TextBox11
+        ' 
+        TextBox11.Location = New Point(9, 155)
+        TextBox11.Name = "TextBox11"
+        TextBox11.Size = New Size(219, 27)
+        TextBox11.TabIndex = 6
+        TextBox11.UseWaitCursor = True
+        ' 
+        ' Button5
+        ' 
+        Button5.Location = New Point(9, 342)
+        Button5.Name = "Button5"
+        Button5.Size = New Size(149, 29)
+        Button5.TabIndex = 5
+        Button5.Text = "Confirmar"
+        Button5.UseVisualStyleBackColor = True
+        Button5.UseWaitCursor = True
+        ' 
+        ' TextBox15
+        ' 
+        TextBox15.Location = New Point(9, 85)
+        TextBox15.Name = "TextBox15"
+        TextBox15.Size = New Size(219, 27)
+        TextBox15.TabIndex = 1
+        TextBox15.UseWaitCursor = True
+        ' 
+        ' Label25
+        ' 
+        Label25.AutoSize = True
+        Label25.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label25.Location = New Point(9, 59)
+        Label25.Name = "Label25"
+        Label25.Size = New Size(57, 23)
+        Label25.TabIndex = 0
+        Label25.Text = "Título:"
+        Label25.UseWaitCursor = True
+        ' 
+        ' Panel4
+        ' 
+        Panel4.BorderStyle = BorderStyle.Fixed3D
+        Panel4.Controls.Add(Label18)
+        Panel4.Controls.Add(Label20)
+        Panel4.Controls.Add(Label21)
+        Panel4.Controls.Add(TextBox12)
+        Panel4.Controls.Add(TextBox13)
+        Panel4.Controls.Add(Button4)
+        Panel4.Controls.Add(TextBox14)
+        Panel4.Controls.Add(Label23)
+        Panel4.Location = New Point(26, 15)
+        Panel4.Name = "Panel4"
+        Panel4.Size = New Size(294, 378)
+        Panel4.TabIndex = 3
+        Panel4.UseWaitCursor = True
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label18.Location = New Point(9, 12)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(173, 31)
+        Label18.TabIndex = 13
+        Label18.Text = "Registrar Autor:"
+        Label18.UseWaitCursor = True
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label20.Location = New Point(9, 219)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(100, 23)
+        Label20.TabIndex = 12
+        Label20.Text = "País Origen:"
+        Label20.UseWaitCursor = True
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label21.Location = New Point(9, 147)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(31, 23)
+        Label21.TabIndex = 11
+        Label21.Text = "ID:"
+        Label21.UseWaitCursor = True
+        ' 
+        ' TextBox12
+        ' 
+        TextBox12.Location = New Point(9, 245)
+        TextBox12.Name = "TextBox12"
+        TextBox12.Size = New Size(219, 27)
+        TextBox12.TabIndex = 7
+        TextBox12.UseWaitCursor = True
+        ' 
+        ' TextBox13
+        ' 
+        TextBox13.Location = New Point(9, 173)
+        TextBox13.Name = "TextBox13"
+        TextBox13.Size = New Size(219, 27)
+        TextBox13.TabIndex = 6
+        TextBox13.UseWaitCursor = True
+        ' 
+        ' Button4
+        ' 
+        Button4.Location = New Point(9, 301)
+        Button4.Name = "Button4"
+        Button4.Size = New Size(149, 29)
+        Button4.TabIndex = 5
+        Button4.Text = "Confirmar"
+        Button4.UseVisualStyleBackColor = True
+        Button4.UseWaitCursor = True
+        ' 
+        ' TextBox14
+        ' 
+        TextBox14.Location = New Point(9, 98)
+        TextBox14.Name = "TextBox14"
+        TextBox14.Size = New Size(219, 27)
+        TextBox14.TabIndex = 1
+        TextBox14.UseWaitCursor = True
+        ' 
+        ' Label23
+        ' 
+        Label23.AutoSize = True
+        Label23.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label23.Location = New Point(9, 72)
+        Label23.Name = "Label23"
+        Label23.Size = New Size(77, 23)
+        Label23.TabIndex = 0
+        Label23.Text = "Nombre:"
+        Label23.UseWaitCursor = True
+        ' 
         ' TabPage6
         ' 
+        TabPage6.Controls.Add(TableLayoutPanel2)
         TabPage6.Location = New Point(4, 29)
         TabPage6.Name = "TabPage6"
         TabPage6.Padding = New Padding(3)
@@ -513,6 +759,97 @@ Partial Class Inicio
         TabPage6.Text = "Historial préstamos"
         TabPage6.UseVisualStyleBackColor = True
         TabPage6.UseWaitCursor = True
+        ' 
+        ' TableLayoutPanel2
+        ' 
+        TableLayoutPanel2.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
+        TableLayoutPanel2.ColumnCount = 6
+        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
+        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
+        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
+        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
+        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
+        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 20.0F))
+        TableLayoutPanel2.Controls.Add(Label32, 5, 0)
+        TableLayoutPanel2.Controls.Add(Label27, 4, 0)
+        TableLayoutPanel2.Controls.Add(Label28, 3, 0)
+        TableLayoutPanel2.Controls.Add(Label29, 2, 0)
+        TableLayoutPanel2.Controls.Add(Label30, 1, 0)
+        TableLayoutPanel2.Controls.Add(Label31, 0, 0)
+        TableLayoutPanel2.Location = New Point(4, 3)
+        TableLayoutPanel2.Name = "TableLayoutPanel2"
+        TableLayoutPanel2.RowCount = 2
+        TableLayoutPanel2.RowStyles.Add(New RowStyle())
+        TableLayoutPanel2.RowStyles.Add(New RowStyle())
+        TableLayoutPanel2.Size = New Size(798, 399)
+        TableLayoutPanel2.TabIndex = 1
+        TableLayoutPanel2.UseWaitCursor = True
+        ' 
+        ' Label32
+        ' 
+        Label32.AutoSize = True
+        Label32.Font = New Font("Segoe UI", 8.3F)
+        Label32.Location = New Point(678, 1)
+        Label32.Name = "Label32"
+        Label32.Size = New Size(85, 19)
+        Label32.TabIndex = 5
+        Label32.Text = "Observación"
+        Label32.UseWaitCursor = True
+        ' 
+        ' Label27
+        ' 
+        Label27.AutoSize = True
+        Label27.Font = New Font("Segoe UI", 8.3F)
+        Label27.Location = New Point(539, 1)
+        Label27.Name = "Label27"
+        Label27.Size = New Size(132, 19)
+        Label27.TabIndex = 4
+        Label27.Text = "Dia de la devolución"
+        Label27.UseWaitCursor = True
+        ' 
+        ' Label28
+        ' 
+        Label28.AutoSize = True
+        Label28.Font = New Font("Segoe UI", 8.3F)
+        Label28.Location = New Point(419, 1)
+        Label28.Name = "Label28"
+        Label28.Size = New Size(113, 19)
+        Label28.TabIndex = 3
+        Label28.Text = "Dia del prestamo"
+        Label28.UseWaitCursor = True
+        ' 
+        ' Label29
+        ' 
+        Label29.AutoSize = True
+        Label29.Font = New Font("Segoe UI", 8.3F)
+        Label29.Location = New Point(314, 1)
+        Label29.Name = "Label29"
+        Label29.Size = New Size(98, 19)
+        Label29.TabIndex = 2
+        Label29.Text = "Libro prestado"
+        Label29.UseWaitCursor = True
+        ' 
+        ' Label30
+        ' 
+        Label30.AutoSize = True
+        Label30.Font = New Font("Segoe UI", 8.3F)
+        Label30.Location = New Point(151, 1)
+        Label30.Name = "Label30"
+        Label30.Size = New Size(156, 19)
+        Label30.TabIndex = 1
+        Label30.Text = "Usuario al que se presta"
+        Label30.UseWaitCursor = True
+        ' 
+        ' Label31
+        ' 
+        Label31.AutoSize = True
+        Label31.Font = New Font("Segoe UI", 8.3F)
+        Label31.Location = New Point(4, 1)
+        Label31.Name = "Label31"
+        Label31.Size = New Size(140, 19)
+        Label31.TabIndex = 0
+        Label31.Text = "Número de Préstamo"
+        Label31.UseWaitCursor = True
         ' 
         ' Inicio
         ' 
@@ -534,6 +871,14 @@ Partial Class Inicio
         TabPage4.ResumeLayout(False)
         Panel3.ResumeLayout(False)
         Panel3.PerformLayout()
+        TabPage5.ResumeLayout(False)
+        Panel5.ResumeLayout(False)
+        Panel5.PerformLayout()
+        Panel4.ResumeLayout(False)
+        Panel4.PerformLayout()
+        TabPage6.ResumeLayout(False)
+        TableLayoutPanel2.ResumeLayout(False)
+        TableLayoutPanel2.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -577,5 +922,32 @@ Partial Class Inicio
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents TextBox12 As TextBox
+    Friend WithEvents TextBox13 As TextBox
+    Friend WithEvents Button4 As Button
+    Friend WithEvents TextBox14 As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBox11 As TextBox
+    Friend WithEvents Button5 As Button
+    Friend WithEvents TextBox15 As TextBox
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label26 As Label
+    Friend WithEvents TextBox16 As TextBox
+    Protected WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label32 As Label
 
 End Class
