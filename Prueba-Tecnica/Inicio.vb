@@ -26,6 +26,8 @@ Public Class Inicio
     Private Fecha_Publicacion As String
     Private ISBN As String
     Private ID_Autor_Libro As String
+    'Variables de Manejo de Usuarios
+    Private ID_Usuario As String
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MostrarDatosVerPrestamos()
@@ -37,6 +39,8 @@ Public Class Inicio
             MostrarDatosVerPrestamos()
         ElseIf TabControl1.SelectedTab Is TabPage6 Then
             MostrarDatosHistorial()
+        ElseIf TabControl1.SelectedTab Is TabPage3 Then
+            MostrarEstadosUsuario()
         End If
     End Sub
 
@@ -312,11 +316,77 @@ Public Class Inicio
         End Using
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub MostrarEstadosUsuario()
 
+        'MYCONN es la variable de conexion de base de datos, dentro de esta va el servidor, la base de datos, el usuario
+        'y la contraseña y mi CMD es la variable de comando, por dentro va la consulta pero como se usan procedimientos almacendos
+        'se usa historial_prestamos() que anteriormente se definio en la base de datos.
+        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
+        myCmd = New MySqlCommand("call estado_usuarios()", myConn)
+
+        'Limpiar la tabla antes de ingresar los datos nuevos
+        TableLayoutPanel3.Controls.Clear()
+        TableLayoutPanel3.RowStyles.Clear()
+        TableLayoutPanel3.ColumnStyles.Clear()
+
+        'Definimos el numero de columnas 
+        TableLayoutPanel3.ColumnCount = 3
+        TableLayoutPanel3.RowCount = 1 'Empezamos con la fila de encabezados
+
+
+        'Agregamos los encabezados con el procedimiento creado anteriormente.
+        AgregarCeldaEncabezado(TableLayoutPanel3, "Estado", 0, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel3, "ID del usuario", 1, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel3, "Nombre", 2, 0)
+
+        'Conectamos a la base de datos y leemos las filas con MySqlDataReader usando el comando creado anteriormente.
+        Using myConn
+            Using myCmd
+                myConn.Open()
+
+                Using lector As MySqlDataReader = myCmd.ExecuteReader()
+                    Dim filaActual As Integer = 1 'Iniciamos después del encabezado
+
+                    While lector.Read()
+                        'Incrementamos el contador de filas del panel
+                        TableLayoutPanel2.RowCount += 1
+
+                        'Permitir que la fila se adapte al tamaño del texto
+                        TableLayoutPanel2.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+
+                        'Extraer los datos del lector
+                        Dim nombre As String = lector("Estado").ToString()
+                        Dim id_del_usuario As String = lector("ID_Usuario").ToString()
+                        Dim nombre_usuario As String = lector("Nombre").ToString()
+
+                        'Agregar los controles Label a cada celda de la fila actual
+                        AgregarCeldaDato(TableLayoutPanel3, nombre, 0, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel3, id_del_usuario, 1, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel3, nombre_usuario, 2, filaActual)
+
+                        filaActual += 1
+                    End While
+                End Using
+            End Using
+        End Using
     End Sub
 
-    Private Sub Panel6_Paint(sender As Object, e As PaintEventArgs) Handles Panel6.Paint
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
+        myCmd = New MySqlCommand("cambio_estado", myConn)
 
+        ID_Usuario = TextBox17.Text
+        Using myConn
+            Using myCmd
+                myConn.Open()
+                myCmd.CommandType = CommandType.StoredProcedure
+                myCmd.Parameters.AddWithValue("id_reg", ID_Usuario)
+                myCmd.ExecuteNonQuery()
+                MessageBox.Show("Cambio de estado exitoso.")
+
+            End Using
+        End Using
+        MostrarEstadosUsuario()
     End Sub
+
 End Class

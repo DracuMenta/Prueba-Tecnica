@@ -112,14 +112,13 @@ Partial Class Inicio
         TabControl1.Controls.Add(TabPage5)
         TabControl1.Controls.Add(TabPage6)
         TabControl1.Controls.Add(TabPage3)
-        TabControl1.Location = New Point(2, 12)
+        TabControl1.Dock = DockStyle.Fill
+        TabControl1.Location = New Point(0, 0)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(807, 437)
+        TabControl1.Size = New Size(814, 446)
         TabControl1.TabIndex = 0
         TabControl1.UseWaitCursor = True
-        TabControl1.Dock = DockStyle.Fill
-
         ' 
         ' TabPage1
         ' 
@@ -127,7 +126,7 @@ Partial Class Inicio
         TabPage1.Location = New Point(4, 29)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(799, 404)
+        TabPage1.Size = New Size(806, 413)
         TabPage1.TabIndex = 0
         TabPage1.Text = "Ver Préstamos"
         TabPage1.UseVisualStyleBackColor = True
@@ -699,7 +698,7 @@ Partial Class Inicio
         TabPage6.Location = New Point(4, 29)
         TabPage6.Name = "TabPage6"
         TabPage6.Padding = New Padding(3)
-        TabPage6.Size = New Size(799, 404)
+        TabPage6.Size = New Size(806, 413)
         TabPage6.TabIndex = 5
         TabPage6.Text = "Historial préstamos"
         TabPage6.UseVisualStyleBackColor = True
@@ -707,18 +706,17 @@ Partial Class Inicio
         ' 
         ' TableLayoutPanel2
         ' 
+        TableLayoutPanel2.Anchor = AnchorStyles.Left Or AnchorStyles.Right
         TableLayoutPanel2.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
         TableLayoutPanel2.ColumnCount = 1
         TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
-        TableLayoutPanel2.Dock = DockStyle.Fill
-        TableLayoutPanel2.Location = New Point(3, 3)
+        TableLayoutPanel2.Location = New Point(3, 7)
         TableLayoutPanel2.Name = "TableLayoutPanel2"
         TableLayoutPanel2.RowCount = 1
         TableLayoutPanel2.RowStyles.Add(New RowStyle())
-        TableLayoutPanel2.Size = New Size(793, 398)
+        TableLayoutPanel2.Size = New Size(800, 398)
         TableLayoutPanel2.TabIndex = 1
         TableLayoutPanel2.UseWaitCursor = True
-        TableLayoutPanel2.Anchor = AnchorStyles.Left Or AnchorStyles.Right
         ' 
         ' TabPage3
         ' 
