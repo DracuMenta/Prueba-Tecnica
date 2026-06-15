@@ -78,12 +78,6 @@ Partial Class Inicio
         Label23 = New Label()
         TabPage6 = New TabPage()
         TableLayoutPanel2 = New TableLayoutPanel()
-        Label32 = New Label()
-        Label27 = New Label()
-        Label28 = New Label()
-        Label29 = New Label()
-        Label30 = New Label()
-        Label31 = New Label()
         TabPage3 = New TabPage()
         Panel6 = New Panel()
         Button6 = New Button()
@@ -105,7 +99,6 @@ Partial Class Inicio
         Panel5.SuspendLayout()
         Panel4.SuspendLayout()
         TabPage6.SuspendLayout()
-        TableLayoutPanel2.SuspendLayout()
         TabPage3.SuspendLayout()
         Panel6.SuspendLayout()
         TableLayoutPanel3.SuspendLayout()
@@ -122,9 +115,11 @@ Partial Class Inicio
         TabControl1.Location = New Point(2, 12)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(814, 437)
+        TabControl1.Size = New Size(807, 437)
         TabControl1.TabIndex = 0
         TabControl1.UseWaitCursor = True
+        TabControl1.Dock = DockStyle.Fill
+
         ' 
         ' TabPage1
         ' 
@@ -132,7 +127,7 @@ Partial Class Inicio
         TabPage1.Location = New Point(4, 29)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(806, 404)
+        TabPage1.Size = New Size(799, 404)
         TabPage1.TabIndex = 0
         TabPage1.Text = "Ver Préstamos"
         TabPage1.UseVisualStyleBackColor = True
@@ -142,7 +137,6 @@ Partial Class Inicio
         ' 
         TableLayoutPanel1.AllowDrop = True
         TableLayoutPanel1.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
-        TableLayoutPanel1.ColumnCount =
         TableLayoutPanel1.ColumnStyles.Add(New ColumnStyle())
         TableLayoutPanel1.Location = New Point(3, 3)
         TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -159,7 +153,7 @@ Partial Class Inicio
         TabPage2.Location = New Point(4, 29)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(806, 404)
+        TabPage2.Size = New Size(799, 404)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Prestamos y devoluciones"
         TabPage2.UseVisualStyleBackColor = True
@@ -319,7 +313,7 @@ Partial Class Inicio
         TabPage4.Location = New Point(4, 29)
         TabPage4.Name = "TabPage4"
         TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(806, 404)
+        TabPage4.Size = New Size(799, 404)
         TabPage4.TabIndex = 3
         TabPage4.Text = "Registrar usuario"
         TabPage4.UseVisualStyleBackColor = True
@@ -480,7 +474,7 @@ Partial Class Inicio
         TabPage5.Location = New Point(4, 29)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
-        TabPage5.Size = New Size(806, 404)
+        TabPage5.Size = New Size(799, 404)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Registrar libro"
         TabPage5.UseVisualStyleBackColor = True
@@ -567,10 +561,12 @@ Partial Class Inicio
         ' 
         ' TextBox11
         ' 
+        TextBox11.ForeColor = Color.Gray
         TextBox11.Location = New Point(9, 155)
         TextBox11.Name = "TextBox11"
         TextBox11.Size = New Size(219, 27)
         TextBox11.TabIndex = 6
+        TextBox11.Text = "AAAAMMDD"
         TextBox11.UseWaitCursor = True
         ' 
         ' Button5
@@ -703,7 +699,7 @@ Partial Class Inicio
         TabPage6.Location = New Point(4, 29)
         TabPage6.Name = "TabPage6"
         TabPage6.Padding = New Padding(3)
-        TabPage6.Size = New Size(806, 404)
+        TabPage6.Size = New Size(799, 404)
         TabPage6.TabIndex = 5
         TabPage6.Text = "Historial préstamos"
         TabPage6.UseVisualStyleBackColor = True
@@ -712,93 +708,17 @@ Partial Class Inicio
         ' TableLayoutPanel2
         ' 
         TableLayoutPanel2.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
-        TableLayoutPanel2.ColumnCount = 6
+        TableLayoutPanel2.ColumnCount = 1
         TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
-        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
-        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
-        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
-        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle())
-        TableLayoutPanel2.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 20.0F))
-        TableLayoutPanel2.Controls.Add(Label32, 5, 0)
-        TableLayoutPanel2.Controls.Add(Label27, 4, 0)
-        TableLayoutPanel2.Controls.Add(Label28, 3, 0)
-        TableLayoutPanel2.Controls.Add(Label29, 2, 0)
-        TableLayoutPanel2.Controls.Add(Label30, 1, 0)
-        TableLayoutPanel2.Controls.Add(Label31, 0, 0)
-        TableLayoutPanel2.Location = New Point(4, 3)
+        TableLayoutPanel2.Dock = DockStyle.Fill
+        TableLayoutPanel2.Location = New Point(3, 3)
         TableLayoutPanel2.Name = "TableLayoutPanel2"
-        TableLayoutPanel2.RowCount = 2
+        TableLayoutPanel2.RowCount = 1
         TableLayoutPanel2.RowStyles.Add(New RowStyle())
-        TableLayoutPanel2.RowStyles.Add(New RowStyle())
-        TableLayoutPanel2.Size = New Size(798, 399)
+        TableLayoutPanel2.Size = New Size(793, 398)
         TableLayoutPanel2.TabIndex = 1
         TableLayoutPanel2.UseWaitCursor = True
-        ' 
-        ' Label32
-        ' 
-        Label32.AutoSize = True
-        Label32.Font = New Font("Segoe UI", 8.3F)
-        Label32.Location = New Point(678, 1)
-        Label32.Name = "Label32"
-        Label32.Size = New Size(85, 19)
-        Label32.TabIndex = 5
-        Label32.Text = "Observación"
-        Label32.UseWaitCursor = True
-        ' 
-        ' Label27
-        ' 
-        Label27.AutoSize = True
-        Label27.Font = New Font("Segoe UI", 8.3F)
-        Label27.Location = New Point(539, 1)
-        Label27.Name = "Label27"
-        Label27.Size = New Size(132, 19)
-        Label27.TabIndex = 4
-        Label27.Text = "Dia de la devolución"
-        Label27.UseWaitCursor = True
-        ' 
-        ' Label28
-        ' 
-        Label28.AutoSize = True
-        Label28.Font = New Font("Segoe UI", 8.3F)
-        Label28.Location = New Point(419, 1)
-        Label28.Name = "Label28"
-        Label28.Size = New Size(113, 19)
-        Label28.TabIndex = 3
-        Label28.Text = "Dia del prestamo"
-        Label28.UseWaitCursor = True
-        ' 
-        ' Label29
-        ' 
-        Label29.AutoSize = True
-        Label29.Font = New Font("Segoe UI", 8.3F)
-        Label29.Location = New Point(314, 1)
-        Label29.Name = "Label29"
-        Label29.Size = New Size(98, 19)
-        Label29.TabIndex = 2
-        Label29.Text = "Libro prestado"
-        Label29.UseWaitCursor = True
-        ' 
-        ' Label30
-        ' 
-        Label30.AutoSize = True
-        Label30.Font = New Font("Segoe UI", 8.3F)
-        Label30.Location = New Point(151, 1)
-        Label30.Name = "Label30"
-        Label30.Size = New Size(156, 19)
-        Label30.TabIndex = 1
-        Label30.Text = "Usuario al que se presta"
-        Label30.UseWaitCursor = True
-        ' 
-        ' Label31
-        ' 
-        Label31.AutoSize = True
-        Label31.Font = New Font("Segoe UI", 8.3F)
-        Label31.Location = New Point(4, 1)
-        Label31.Name = "Label31"
-        Label31.Size = New Size(140, 19)
-        Label31.TabIndex = 0
-        Label31.Text = "Número de Préstamo"
-        Label31.UseWaitCursor = True
+        TableLayoutPanel2.Anchor = AnchorStyles.Left Or AnchorStyles.Right
         ' 
         ' TabPage3
         ' 
@@ -807,7 +727,7 @@ Partial Class Inicio
         TabPage3.Location = New Point(4, 29)
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
-        TabPage3.Size = New Size(806, 404)
+        TabPage3.Size = New Size(799, 404)
         TabPage3.TabIndex = 6
         TabPage3.Text = "Manejo de usuarios"
         TabPage3.UseVisualStyleBackColor = True
@@ -940,8 +860,6 @@ Partial Class Inicio
         Panel4.ResumeLayout(False)
         Panel4.PerformLayout()
         TabPage6.ResumeLayout(False)
-        TableLayoutPanel2.ResumeLayout(False)
-        TableLayoutPanel2.PerformLayout()
         TabPage3.ResumeLayout(False)
         Panel6.ResumeLayout(False)
         Panel6.PerformLayout()
@@ -1006,12 +924,6 @@ Partial Class Inicio
     Friend WithEvents Label26 As Label
     Friend WithEvents TextBox16 As TextBox
     Protected WithEvents TableLayoutPanel2 As TableLayoutPanel
-    Friend WithEvents Label27 As Label
-    Friend WithEvents Label28 As Label
-    Friend WithEvents Label29 As Label
-    Friend WithEvents Label30 As Label
-    Friend WithEvents Label31 As Label
-    Friend WithEvents Label32 As Label
     Friend WithEvents TabPage3 As TabPage
     Protected WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents Label33 As Label

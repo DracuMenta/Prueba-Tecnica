@@ -10,37 +10,55 @@ Public Class Inicio
     Private ID_Usuario_Prestamo As String
     Private ISBN_Devolucion As String
     Private Observacion As String
-
+    'Variables de Registro de Usuario
+    Private Nombre_Usuario As String
+    Private Tipo_ID As String
+    Private ID As String
+    Private Pais As String
+    Private Ciudad As String
+    Private Direccion As String
+    'Variables de Registro de Autor
+    Private Nombre_Autor As String
+    Private ID_Autor As String
+    Private Pais_Origen As String
+    'Variables de Registro de Libro
+    Private Titulo As String
+    Private Fecha_Publicacion As String
+    Private ISBN As String
+    Private ID_Autor_Libro As String
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MostrarDatosVerPrestamos()
+
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
         If TabControl1.SelectedTab Is TabPage1 Then
             MostrarDatosVerPrestamos()
+        ElseIf TabControl1.SelectedTab Is TabPage6 Then
+            MostrarDatosHistorial()
         End If
     End Sub
 
     'Primera pestaña: Ver Prestamos
     'Se crean dos procedimientos de ayuda para agregar celdas al TableLayoutPanel, uno para encabezados y otro para datos.
     'encabezados
-    Private Sub AgregarCeldaEncabezado(texto As String, columna As Integer, fila As Integer)
+    Private Sub AgregarCeldaEncabezado(panel As TableLayoutPanel, texto As String, columna As Integer, fila As Integer)
         Dim lbl As New Label()
         lbl.Text = texto
         lbl.Font = New Font(lbl.Font, FontStyle.Bold)
         lbl.AutoSize = True
         lbl.Dock = DockStyle.Fill
-        TableLayoutPanel1.Controls.Add(lbl, columna, fila)
+        panel.Controls.Add(lbl, columna, fila)
     End Sub
 
     'datos
-    Private Sub AgregarCeldaDato(texto As String, columna As Integer, fila As Integer)
+    Private Sub AgregarCeldaDato(panel As TableLayoutPanel, texto As String, columna As Integer, fila As Integer)
         Dim lbl As New Label()
         lbl.Text = texto
         lbl.AutoSize = True
         lbl.Dock = DockStyle.Fill
-        TableLayoutPanel1.Controls.Add(lbl, columna, fila)
+        panel.Controls.Add(lbl, columna, fila)
     End Sub
 
     'Cargar elementos de mi base de datos.
@@ -64,10 +82,10 @@ Public Class Inicio
 
 
         'Agregamos los encabezados con el procedimiento creado anteriormente.
-        AgregarCeldaEncabezado("Número de prestamo", 0, 0)
-        AgregarCeldaEncabezado("Usuario al que se presto", 1, 0)
-        AgregarCeldaEncabezado("Libro prestado", 2, 0)
-        AgregarCeldaEncabezado("Fecha de prestamo", 3, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel1, "Número de prestamo", 0, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel1, "Usuario al que se presto", 1, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel1, "Libro prestado", 2, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel1, "Fecha de prestamo", 3, 0)
 
         'Conectamos a la base de datos y leemos las filas con MySqlDataReader usando el comando creado anteriormente.
         Using myConn
@@ -91,10 +109,10 @@ Public Class Inicio
                         Dim fecha As Date = lector("Dia_Prestamos")
 
                         'Agregar los controles Label a cada celda de la fila actual
-                        AgregarCeldaDato(id, 0, filaActual)
-                        AgregarCeldaDato(usuario, 1, filaActual)
-                        AgregarCeldaDato(libro, 2, filaActual)
-                        AgregarCeldaDato(fecha, 3, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel1, id, 0, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel1, usuario, 1, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel1, libro, 2, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel1, fecha, 3, filaActual)
 
                         filaActual += 1
                     End While
@@ -102,6 +120,10 @@ Public Class Inicio
             End Using
         End Using
     End Sub
+
+    'Cuando se clickea el boton de prestar libro, se conecta a la base de datos y se ejecuta el procedimiento almacenado
+    '"crear_prestamo" con los parametros del ISBN y el ID del usuario, que se obtienen de los TextBox correspondientes.
+    'Luego se muestra un mensaje de confirmacion.
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
         myCmd = New MySqlCommand("crear_prestamo", myConn)
@@ -121,6 +143,8 @@ Public Class Inicio
         End Using
     End Sub
 
+    'Cuando se clickea el boton de devolver libro, se conecta a la base de datos y se ejecuta el procedimiento almacenado de
+    '"entregar_libro" con los parametros del ISBN y la observacion, que se obtienen de los TextBox correspondientes.
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
         myCmd = New MySqlCommand("entregar_libro", myConn)
@@ -136,6 +160,154 @@ Public Class Inicio
                 myCmd.ExecuteNonQuery()
                 MessageBox.Show("Libro devuelto exitosamente.")
 
+            End Using
+        End Using
+    End Sub
+
+    'Cuando se clickea obtiene los valores del formulario creado y los envia al procedimiento de registrar_usuario.
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
+        myCmd = New MySqlCommand("registrar_usuario", myConn)
+
+        Nombre_Usuario = TextBox6.Text
+        Tipo_ID = ComboBox1.Text
+        ID = TextBox7.Text
+        Pais = TextBox8.Text
+        Ciudad = TextBox9.Text
+        Direccion = TextBox10.Text
+        Using myConn
+            Using myCmd
+                myConn.Open()
+                myCmd.CommandType = CommandType.StoredProcedure
+                myCmd.Parameters.AddWithValue("nombre_reg", Nombre_Usuario)
+                myCmd.Parameters.AddWithValue("tipo_id_reg", Tipo_ID)
+                myCmd.Parameters.AddWithValue("id_reg", ID)
+                myCmd.Parameters.AddWithValue("pais_reg", Pais)
+                myCmd.Parameters.AddWithValue("ciudad_reg", Ciudad)
+                myCmd.Parameters.AddWithValue("direccion_reg", Direccion)
+                myCmd.ExecuteNonQuery()
+                MessageBox.Show("Usuario registrado exitosamente.")
+
+            End Using
+        End Using
+    End Sub
+
+    'Cuando se clickea obtiene los valores del formulario creado y los envia al procedimiento de registrar_autor.
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
+        myCmd = New MySqlCommand("registrar_autor", myConn)
+
+        Nombre_Autor = TextBox14.Text
+        ID_Autor = TextBox13.Text
+        Pais_Origen = TextBox12.Text
+        Using myConn
+            Using myCmd
+                myConn.Open()
+                myCmd.CommandType = CommandType.StoredProcedure
+                myCmd.Parameters.AddWithValue("nombre_reg", Nombre_Autor)
+                myCmd.Parameters.AddWithValue("id_reg", ID_Autor)
+                myCmd.Parameters.AddWithValue("pais_reg", Pais_Origen)
+                myCmd.ExecuteNonQuery()
+                MessageBox.Show("Autor Registrado exitosamente.")
+
+            End Using
+        End Using
+    End Sub
+
+    'Revisa si el TextBox tiene el texto difuminado, si es asi, lo borra y pone el color negro
+    'Asi revisamos que el usuario ingrese bien el formato de fecha.
+    Private Sub TextBox11_Enter(sender As Object, e As EventArgs) Handles TextBox11.Enter
+        ' Al hacer clic en el TextBox, si tiene el texto difuminado, lo borramos y ponemos el color a negro
+        If (TextBox11.Text = "AAAAMMDD") Then
+            TextBox11.Text = ""
+            TextBox11.ForeColor = Color.Black
+        End If
+    End Sub
+
+    'Obtiene los valores del formulario creado y los envia al procedimiento de registrar_libro.
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
+        myCmd = New MySqlCommand("registrar_libro", myConn)
+
+        Titulo = TextBox15.Text
+        Fecha_Publicacion = TextBox11.Text
+        ISBN = TextBox5.Text
+        ID_Autor_Libro = TextBox16.Text
+        Using myConn
+            Using myCmd
+                myConn.Open()
+                myCmd.CommandType = CommandType.StoredProcedure
+                myCmd.Parameters.AddWithValue("titulo_reg", Titulo)
+                myCmd.Parameters.AddWithValue("fecha_publicacion_reg", Fecha_Publicacion)
+                myCmd.Parameters.AddWithValue("isbn_reg", ISBN)
+                myCmd.Parameters.AddWithValue("id_autor_reg", ID_Autor_Libro)
+                myCmd.ExecuteNonQuery()
+                MessageBox.Show("Libro Registrado exitosamente.")
+
+            End Using
+        End Using
+    End Sub
+
+    Private Sub MostrarDatosHistorial()
+
+        'MYCONN es la variable de conexion de base de datos, dentro de esta va el servidor, la base de datos, el usuario
+        'y la contraseña y mi CMD es la variable de comando, por dentro va la consulta pero como se usan procedimientos almacendos
+        'se usa historial_prestamos() que anteriormente se definio en la base de datos.
+        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
+        myCmd = New MySqlCommand("call historial_prestamos()", myConn)
+
+        'Limpiar la tabla antes de ingresar los datos nuevos
+        TableLayoutPanel2.Controls.Clear()
+        TableLayoutPanel2.RowStyles.Clear()
+        TableLayoutPanel2.ColumnStyles.Clear()
+
+        'Definimos el numero de columnas 
+        TableLayoutPanel2.ColumnCount = 6
+        TableLayoutPanel2.RowCount = 1 'Empezamos con la fila de encabezados
+
+
+        'Agregamos los encabezados con el procedimiento creado anteriormente.
+        AgregarCeldaEncabezado(TableLayoutPanel2, "Número", 0, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel2, "Usuario al que se presto", 1, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel2, "Libro prestado", 2, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel2, "Fecha de prestamo", 3, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel2, "Fecha de devolucion", 4, 0)
+        AgregarCeldaEncabezado(TableLayoutPanel2, "Observacion", 5, 0)
+
+        'Conectamos a la base de datos y leemos las filas con MySqlDataReader usando el comando creado anteriormente.
+        Using myConn
+            Using myCmd
+                myConn.Open()
+
+                Using lector As MySqlDataReader = myCmd.ExecuteReader()
+                    Dim filaActual As Integer = 1 'Iniciamos después del encabezado
+
+                    While lector.Read()
+                        'Incrementamos el contador de filas del panel
+                        TableLayoutPanel2.RowCount += 1
+
+                        'Permitir que la fila se adapte al tamaño del texto
+                        TableLayoutPanel2.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+
+                        'Extraer los datos del lector
+                        Dim id As String = lector("ID").ToString()
+                        Dim usuario As String = lector("Nombre").ToString()
+                        Dim libro As String = lector("Titulo").ToString()
+                        Dim fecha As Date = lector("Dia_Prestamos")
+                        Dim fecha_prestamo As Date = lector("Dia_Devolucion")
+                        Dim observacion As String = lector("Observacion").ToString()
+
+                        'Agregar los controles Label a cada celda de la fila actual
+                        AgregarCeldaDato(TableLayoutPanel2, id, 0, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel2, usuario, 1, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel2, libro, 2, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel2, fecha, 3, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel2, fecha_prestamo, 4, filaActual)
+                        AgregarCeldaDato(TableLayoutPanel2, observacion, 5, filaActual)
+
+                        filaActual += 1
+                    End While
+                End Using
             End Using
         End Using
     End Sub
