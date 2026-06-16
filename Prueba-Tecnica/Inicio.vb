@@ -1,9 +1,11 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Data.SqlClient
 Public Class Inicio
+    'Variable de conexion a la base de datos, se define el servidor, la base de datos y la seguridad integrada.
+    Private ReadOnly StringConn As String = "server=localhost; database=Biblioteca; Integrated Security=SSPI;"
     'Variables de la conexion con la base de datos.
-    Private myConn As MySqlConnection
-    Private myCmd As MySqlCommand
-    Private myReader As MySqlDataReader
+    Private myConn As SqlConnection
+    Private myCmd As SqlCommand
+    Private myReader As SqlDataReader
     Private results As String
     'Variables de prestamos y devoluciones.
     Private ISBN_Prestamo As String
@@ -72,8 +74,8 @@ Public Class Inicio
         'MYCONN es la variable de conexion de base de datos, dentro de esta va el servidor, la base de datos, el usuario
         'y la contraseña y mi CMD es la variable de comando, por dentro va la consulta pero como se usan procedimientos almacendos
         'se usa obtener_prestamos() que anteriormente se definio en la base de datos.
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("call obtener_prestamos()", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec obtener_prestamos", myConn)
 
         'Limpiar la tabla antes de ingresar los datos nuevos
         TableLayoutPanel1.Controls.Clear()
@@ -96,7 +98,7 @@ Public Class Inicio
             Using myCmd
                 myConn.Open()
 
-                Using lector As MySqlDataReader = myCmd.ExecuteReader()
+                Using lector As SqlDataReader = myCmd.ExecuteReader()
                     Dim filaActual As Integer = 1 'Iniciamos después del encabezado
 
                     While lector.Read()
@@ -129,49 +131,54 @@ Public Class Inicio
     '"crear_prestamo" con los parametros del ISBN y el ID del usuario, que se obtienen de los TextBox correspondientes.
     'Luego se muestra un mensaje de confirmacion.
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("crear_prestamo", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec crear_prestamo @ISBN_reg, @ID_reg", myConn)
         ISBN_Prestamo = TextBox1.Text
         ID_Usuario_Prestamo = TextBox2.Text
 
         Using myConn
             Using myCmd
                 myConn.Open()
-                myCmd.CommandType = CommandType.StoredProcedure
-                myCmd.Parameters.AddWithValue("ISBN_reg", ISBN_Prestamo)
-                myCmd.Parameters.AddWithValue("ID_reg", ID_Usuario_Prestamo)
+                myCmd.CommandType = CommandType.Text
+                myCmd.Parameters.AddWithValue("@ISBN_reg", ISBN_Prestamo)
+                myCmd.Parameters.AddWithValue("@ID_reg", ID_Usuario_Prestamo)
                 myCmd.ExecuteNonQuery()
                 MessageBox.Show("Libro entregado exitosamente.")
 
             End Using
         End Using
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+
     End Sub
 
     'Cuando se clickea el boton de devolver libro, se conecta a la base de datos y se ejecuta el procedimiento almacenado de
     '"entregar_libro" con los parametros del ISBN y la observacion, que se obtienen de los TextBox correspondientes.
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("entregar_libro", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec entregar_libro @ISBN_reg, @observacion_reg", myConn)
 
         Observacion = TextBox3.Text
         ISBN_Devolucion = TextBox4.Text
         Using myConn
             Using myCmd
                 myConn.Open()
-                myCmd.CommandType = CommandType.StoredProcedure
-                myCmd.Parameters.AddWithValue("ISBN_reg", ISBN_Devolucion)
-                myCmd.Parameters.AddWithValue("observacion_reg", Observacion)
+                myCmd.CommandType = CommandType.Text
+                myCmd.Parameters.AddWithValue("@ISBN_reg", ISBN_Devolucion)
+                myCmd.Parameters.AddWithValue("@observacion_reg", Observacion)
                 myCmd.ExecuteNonQuery()
                 MessageBox.Show("Libro devuelto exitosamente.")
 
             End Using
         End Using
+        TextBox3.Text = ""
+        TextBox4.Text = ""
     End Sub
 
     'Cuando se clickea obtiene los valores del formulario creado y los envia al procedimiento de registrar_usuario.
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("registrar_usuario", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec registrar_usuario @nombre_reg, @tipo_id_reg, @id_reg, @pais_reg, @ciudad_reg, @direccion_reg", myConn)
 
         Nombre_Usuario = TextBox6.Text
         Tipo_ID = ComboBox1.Text
@@ -182,24 +189,30 @@ Public Class Inicio
         Using myConn
             Using myCmd
                 myConn.Open()
-                myCmd.CommandType = CommandType.StoredProcedure
-                myCmd.Parameters.AddWithValue("nombre_reg", Nombre_Usuario)
-                myCmd.Parameters.AddWithValue("tipo_id_reg", Tipo_ID)
-                myCmd.Parameters.AddWithValue("id_reg", ID)
-                myCmd.Parameters.AddWithValue("pais_reg", Pais)
-                myCmd.Parameters.AddWithValue("ciudad_reg", Ciudad)
-                myCmd.Parameters.AddWithValue("direccion_reg", Direccion)
+                myCmd.CommandType = CommandType.Text
+                myCmd.Parameters.AddWithValue("@nombre_reg", Nombre_Usuario)
+                myCmd.Parameters.AddWithValue("@tipo_id_reg", Tipo_ID)
+                myCmd.Parameters.AddWithValue("@id_reg", ID)
+                myCmd.Parameters.AddWithValue("@pais_reg", Pais)
+                myCmd.Parameters.AddWithValue("@ciudad_reg", Ciudad)
+                myCmd.Parameters.AddWithValue("@direccion_reg", Direccion)
                 myCmd.ExecuteNonQuery()
                 MessageBox.Show("Usuario registrado exitosamente.")
 
             End Using
         End Using
+        TextBox6.Text = ""
+        ComboBox1.Text = ""
+        TextBox7.Text = ""
+        TextBox8.Text = ""
+        TextBox9.Text = ""
+        TextBox10.Text = ""
     End Sub
 
     'Cuando se clickea obtiene los valores del formulario creado y los envia al procedimiento de registrar_autor.
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("registrar_autor", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec registrar_autor @nombre_reg, @id_reg, @pais_reg", myConn)
 
         Nombre_Autor = TextBox14.Text
         ID_Autor = TextBox13.Text
@@ -207,15 +220,18 @@ Public Class Inicio
         Using myConn
             Using myCmd
                 myConn.Open()
-                myCmd.CommandType = CommandType.StoredProcedure
-                myCmd.Parameters.AddWithValue("nombre_reg", Nombre_Autor)
-                myCmd.Parameters.AddWithValue("id_reg", ID_Autor)
-                myCmd.Parameters.AddWithValue("pais_reg", Pais_Origen)
+                myCmd.CommandType = CommandType.Text
+                myCmd.Parameters.AddWithValue("@nombre_reg", Nombre_Autor)
+                myCmd.Parameters.AddWithValue("@id_reg", ID_Autor)
+                myCmd.Parameters.AddWithValue("@pais_reg", Pais_Origen)
                 myCmd.ExecuteNonQuery()
                 MessageBox.Show("Autor Registrado exitosamente.")
 
             End Using
         End Using
+        TextBox14.Text = ""
+        TextBox13.Text = ""
+        TextBox12.Text = ""
     End Sub
 
     'Revisa si el TextBox tiene el texto difuminado, si es asi, lo borra y pone el color negro
@@ -230,8 +246,8 @@ Public Class Inicio
 
     'Obtiene los valores del formulario creado y los envia al procedimiento de registrar_libro.
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("registrar_libro", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec registrar_libro @titulo_reg, @fecha_publicacion_reg, @isbn_reg, @id_autor_reg", myConn)
 
         Titulo = TextBox15.Text
         Fecha_Publicacion = TextBox11.Text
@@ -240,16 +256,21 @@ Public Class Inicio
         Using myConn
             Using myCmd
                 myConn.Open()
-                myCmd.CommandType = CommandType.StoredProcedure
-                myCmd.Parameters.AddWithValue("titulo_reg", Titulo)
-                myCmd.Parameters.AddWithValue("fecha_publicacion_reg", Fecha_Publicacion)
-                myCmd.Parameters.AddWithValue("isbn_reg", ISBN)
-                myCmd.Parameters.AddWithValue("id_autor_reg", ID_Autor_Libro)
+                myCmd.CommandType = CommandType.Text
+                myCmd.Parameters.AddWithValue("@titulo_reg", Titulo)
+                myCmd.Parameters.AddWithValue("@fecha_publicacion_reg", Fecha_Publicacion)
+                myCmd.Parameters.AddWithValue("@isbn_reg", ISBN)
+                myCmd.Parameters.AddWithValue("@id_autor_reg", ID_Autor_Libro)
                 myCmd.ExecuteNonQuery()
                 MessageBox.Show("Libro Registrado exitosamente.")
 
             End Using
         End Using
+        TextBox15.Text = ""
+        TextBox11.Text = "AAAAMMDD"
+        TextBox11.ForeColor = Color.Gray
+        TextBox5.Text = ""
+        TextBox16.Text = ""
     End Sub
 
     Private Sub MostrarDatosHistorial()
@@ -257,8 +278,8 @@ Public Class Inicio
         'MYCONN es la variable de conexion de base de datos, dentro de esta va el servidor, la base de datos, el usuario
         'y la contraseña y mi CMD es la variable de comando, por dentro va la consulta pero como se usan procedimientos almacendos
         'se usa historial_prestamos() que anteriormente se definio en la base de datos.
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("call historial_prestamos()", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec historial_prestamos", myConn)
 
         'Limpiar la tabla antes de ingresar los datos nuevos
         TableLayoutPanel2.Controls.Clear()
@@ -283,7 +304,7 @@ Public Class Inicio
             Using myCmd
                 myConn.Open()
 
-                Using lector As MySqlDataReader = myCmd.ExecuteReader()
+                Using lector As SqlDataReader = myCmd.ExecuteReader()
                     Dim filaActual As Integer = 1 'Iniciamos después del encabezado
 
                     While lector.Read()
@@ -321,8 +342,8 @@ Public Class Inicio
         'MYCONN es la variable de conexion de base de datos, dentro de esta va el servidor, la base de datos, el usuario
         'y la contraseña y mi CMD es la variable de comando, por dentro va la consulta pero como se usan procedimientos almacendos
         'se usa historial_prestamos() que anteriormente se definio en la base de datos.
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("call estado_usuarios()", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec estado_usuarios", myConn)
 
         'Limpiar la tabla antes de ingresar los datos nuevos
         TableLayoutPanel3.Controls.Clear()
@@ -344,7 +365,7 @@ Public Class Inicio
             Using myCmd
                 myConn.Open()
 
-                Using lector As MySqlDataReader = myCmd.ExecuteReader()
+                Using lector As SqlDataReader = myCmd.ExecuteReader()
                     Dim filaActual As Integer = 1 'Iniciamos después del encabezado
 
                     While lector.Read()
@@ -372,21 +393,22 @@ Public Class Inicio
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        myConn = New MySqlConnection("server=localhost; database=Biblioteca; uid=root; pwd= ")
-        myCmd = New MySqlCommand("cambio_estado", myConn)
+        myConn = New SqlConnection(StringConn)
+        myCmd = New SqlCommand("exec cambio_estado @id_reg", myConn)
 
         ID_Usuario = TextBox17.Text
         Using myConn
             Using myCmd
                 myConn.Open()
-                myCmd.CommandType = CommandType.StoredProcedure
-                myCmd.Parameters.AddWithValue("id_reg", ID_Usuario)
+                myCmd.CommandType = CommandType.Text
+                myCmd.Parameters.AddWithValue("@id_reg", ID_Usuario)
                 myCmd.ExecuteNonQuery()
                 MessageBox.Show("Cambio de estado exitoso.")
 
             End Using
         End Using
         MostrarEstadosUsuario()
+        TextBox17.Text = ""
     End Sub
 
 End Class
