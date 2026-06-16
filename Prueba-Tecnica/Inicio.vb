@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Public Class Inicio
     'Variable de conexion a la base de datos, se define el servidor, la base de datos y la seguridad integrada.
-    Private ReadOnly StringConn As String = "server=localhost; database=Biblioteca; Integrated Security=SSPI;"
+    Private ReadOnly StringConn As String = "Server=tcp:pruebabiblioteca.database.windows.net,1433;Initial Catalog=Biblioteca;Persist Security Info=False;User ID=CloudSA91d43b96;Password=Prueba1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
     'Variables de la conexion con la base de datos.
     Private myConn As SqlConnection
     Private myCmd As SqlCommand
